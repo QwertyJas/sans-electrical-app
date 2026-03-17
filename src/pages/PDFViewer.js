@@ -1,24 +1,21 @@
+import { useLocation } from "react-router-dom";
+
 function PDFViewer() {
+  const location = useLocation();
+
+  const query = new URLSearchParams(location.search);
+  const page = query.get("page") || 1;
 
   return (
-
-    <div style={{padding:"40px"}}>
-
-      <h1>SANS 10142 Full Standard</h1>
-
-      <p>Reference the full wiring standard below.</p>
-
+    <div style={{ height: "100vh" }}>
       <iframe
-        src="/SANS10142.pdf"
+        src={`/SANS10142.pdf#page=${page}`}
         width="100%"
-        height="800px"
-        title="SANS Standard"
+        height="100%"
+        title="PDF Viewer"
       />
-
     </div>
-
   );
-
 }
 
 export default PDFViewer;
