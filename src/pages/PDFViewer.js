@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { Document, Page, pdfjs } from "react-pdf";
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 function PDFViewer() {
   const location = useLocation();
@@ -14,7 +14,7 @@ function PDFViewer() {
       <p>Opening page: {page}</p>
 
       <Document file="/SANS10142.pdf">
-        <Page pageNumber={page} />
+        <Page pageNumber={page} width={350} />
       </Document>
     </div>
   );
