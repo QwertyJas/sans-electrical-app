@@ -1,7 +1,4 @@
 import { useLocation } from "react-router-dom";
-import { Document, Page, pdfjs } from "react-pdf";
-
-pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 function PDFViewer() {
   const location = useLocation();
@@ -9,13 +6,15 @@ function PDFViewer() {
   const page = parseInt(query.get("page")) || 1;
 
   return (
-    <div style={{ padding: "10px", textAlign: "center" }}>
+    <div style={{ textAlign: "center", padding: "10px" }}>
       <h2>Standard</h2>
-      <p>Opening page: {page}</p>
+      <p>Page: {page}</p>
 
-      <Document file="/SANS10142.pdf">
-        <Page pageNumber={page} width={350} />
-      </Document>
+      <img
+        src={`/pdf-pages/page_.jpg (${page}).jpg`}
+        alt={`Page ${page}`}
+        style={{ width: "100%" }}
+      />
     </div>
   );
 }
