@@ -1,61 +1,28 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import SearchPage from "./pages/SearchPage";
-import ToolsPage from "./pages/ToolsPage";
-import StandardPage from "./pages/StandardPage";
 import IndexPage from "./pages/IndexPage";
-
-import "./App.css";
+import ToolsPage from "./pages/ToolsPage";
+import PDFViewer from "./pages/PDFViewer";
 
 function App() {
-
   return (
-
     <Router>
+      <Routes>
 
-      <div className="App">
+        <Route path="/" element={<SearchPage />} />
 
-        <Routes>
+        <Route path="/index" element={<IndexPage />} />
 
-          <Route path="/" element={<SearchPage />} />
+        <Route path="/tools" element={<ToolsPage />} />
 
-          <Route path="/index" element={<IndexPage />} />
+        {/* THIS is the important one */}
+        <Route path="/standard" element={<PDFViewer />} />
 
-          <Route path="/tools" element={<ToolsPage />} />
-
-          <Route path="/standard" element={<StandardPage />} />
-
-        </Routes>
-
-        <nav
-          style={{
-            position: "fixed",
-            bottom: "0",
-            width: "100%",
-            background: "#f0f0f0",
-            borderTop: "1px solid #ccc",
-            display: "flex",
-            justifyContent: "space-around",
-            padding: "10px 0"
-          }}
-        >
-
-          <Link to="/">Search</Link>
-
-          <Link to="/index">Index</Link>
-
-          <Link to="/tools">Tools</Link>
-
-          <Link to="/standard">Standard</Link>
-
-        </nav>
-
-      </div>
-
+      </Routes>
     </Router>
-
   );
-
 }
 
 export default App;

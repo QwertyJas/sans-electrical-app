@@ -1,117 +1,42 @@
-import { useState } from "react";
+import React from "react";
 
 function RuleViewer({ rule }) {
-
-  const [tab, setTab] = useState("rule");
-
   if (!rule) {
     return <p>Select a rule to view details.</p>;
   }
 
   const openStandard = () => {
-
     if (rule && rule.page) {
       window.location.href = "/standard?page=" + rule.page;
     }
-
   };
 
   return (
-
-  <div
-    id="rule-viewer"
-    style={{
-      marginTop: "20px",
-      padding: "20px",
-      border: "1px solid #ccc",
-      borderRadius: "8px",
-      backgroundColor: "#fff9c4"
-    }}
-    >
-
+    <div style={{ border: "1px solid #ccc", padding: "10px", marginTop: "20px" }}>
       <h2>
         Clause {rule.clause} — {rule.title}
       </h2>
 
-      <div style={{ marginBottom: "15px" }}>
+      <div style={{ marginBottom: "10px" }}>
+        <button style={{ marginRight: "5px" }}>Rule</button>
+        <button style={{ marginRight: "5px" }}>Explanation</button>
+        <button style={{ marginRight: "5px" }}>Changes</button>
 
-        <button
-          onClick={() => setTab("rule")}
-          style={{ marginRight: "10px" }}
-        >
-          Rule
-        </button>
-
-        <button
-          onClick={() => setTab("explanation")}
-          style={{ marginRight: "10px" }}
-        >
-          Explanation
-        </button>
-
-        <button
-          onClick={() => setTab("changes")}
-          style={{ marginRight: "10px" }}
-        >
-          Changes
-        </button>
-
+        {/* IMPORTANT BUTTON */}
         <button onClick={openStandard}>
           Open in Standard
         </button>
-
       </div>
 
-      {tab === "rule" && (
-        <div>
-          <p>{rule.rule}</p>
-        </div>
+      <p>{rule.rule}</p>
+
+      {rule.explanation && (
+        <p style={{ marginTop: "10px", color: "#555" }}>
+          {rule.explanation}
+        </p>
       )}
-
-      {tab === "explanation" && (
-        <div>
-          <pre style={{ whiteSpace: "pre-wrap" }}>
-            {rule.explanation}
-          </pre>
-        </div>
-      )}
-
-      {tab === "changes" && (
-        <div>
-
-          <h3 style={{ color: "red" }}>
-            OLD RULE (Edition 3.1)
-          </h3>
-
-          <p
-            style={{
-              background: "#ffe6e6",
-              padding: "10px"
-            }}
-          >
-            {rule.old_rule}
-          </p>
-
-          <h3 style={{ color: "green" }}>
-            NEW RULE (Edition 3.2)
-          </h3>
-
-          <p
-            style={{
-              background: "#e6ffe6",
-              padding: "10px"
-            }}
-          >
-            {rule.new_rule}
-          </p>
-
-        </div>
-      )}
-
     </div>
-
   );
-
 }
 
 export default RuleViewer;
